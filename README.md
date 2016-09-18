@@ -87,7 +87,15 @@ end
 ```
 ___
 
+Add React
 
+Add to gemfile
+
+`gem 'react-rails', '~> 1.5' `
+
+Then in terminal
+
+`rails generate react:install`
 
 ----
 'in config/routes.rb..'
