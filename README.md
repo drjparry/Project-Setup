@@ -3,7 +3,11 @@
 
 `$ gem install rails`
 
-rails new call4 -d mysql -T
+`rails new call4 -d mysql -T`
+
+or
+
+`'rails new call4 --api -d mysql -T'`
 
 rake db:create
 
