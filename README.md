@@ -15,6 +15,9 @@ rake db:create
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'database_cleaner'
+
 end
 ```
 
@@ -25,16 +28,9 @@ end
 In your `spec/rails_helper.rb` file add the following require statement below the other require statements:
 
 `require 'capybara/rails'`
+`require 'support/factory_girl'`
+`require_relative 'support/database_cleaner.rb'`
 
-____
-
-Adding Factory Girl and Database cleaner
-
-Add to the gemfile
-
-`gem "factory_girl_rails", "~> 4.0"`
-
-`gem 'database_cleaner'`
 
 Add new file
 
@@ -50,10 +46,6 @@ FactoryGirl.define do
   end
 end
 ```
-
-Add to Rails helper
-`require 'support/factory_girl'`
-`require_relative 'support/database_cleaner.rb'`
 
 Add new file 
 
