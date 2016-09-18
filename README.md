@@ -25,30 +25,36 @@ In your `spec/rails_helper.rb` file add the following require statement below th
 ____
 
 Adding Factory Girl and Database cleaner
+
 Add to the gemfile
 
-gem "factory_girl_rails", "~> 4.0"
-gem 'database_cleaner'
+`gem "factory_girl_rails", "~> 4.0"`
+`gem 'database_cleaner'`
 
 Add new file
-spec/factories/callfors.rb
+
+`spec/factories/callfors.rb`
 
 Factory looks like
 
-`FactoryGirl.define do
+```
+FactoryGirl.define do
   factory :callfor do
     title "Dump Trump"
     description "No more Trump please"
   end
-end`
+end
+```
 
 Add to Rails helper
-require 'support/factory_girl'
-require_relative 'support/database_cleaner.rb'
+`require 'support/factory_girl'`
+`require_relative 'support/database_cleaner.rb'`
 
 Add new file 
-spec/support/database_cleaner.rb
+
+`spec/support/database_cleaner.rb`
  `
+ ```
  RSpec.configure do |config|
 
   config.before(:suite) do
@@ -71,15 +77,17 @@ spec/support/database_cleaner.rb
     DatabaseCleaner.clean
   end
 end
- `
+ ```
  
  add new file 
  
- spec/support/factory_girl.rb
+ `spec/support/factory_girl.rb`
  
- `RSpec.configure do |config|
+ ```
+ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-end`
+end
+```
 ___
 
 
