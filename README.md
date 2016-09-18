@@ -33,6 +33,7 @@ Adding Factory Girl and Database cleaner
 Add to the gemfile
 
 `gem "factory_girl_rails", "~> 4.0"`
+
 `gem 'database_cleaner'`
 
 Add new file
