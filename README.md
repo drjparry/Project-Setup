@@ -104,3 +104,7 @@ Then in terminal
 get 'callfors' => 'campaigns#index'
 ```
 
+Add Foundation
+`gem 'foundation-rails'`
+bundle
+`rails g foundation:install`
