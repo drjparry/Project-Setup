@@ -86,6 +86,20 @@ end
   config.include FactoryGirl::Syntax::Methods
 end
 ```
+
+Add Guard to dev
+```
+gem 'guard'
+gem 'guard-rspec' 
+gem 'guard-cucumber'
+
+bundle install
+
+guard init 
+bundle binstubs guard
+cucumber --init 
+```
+
 ___
 
 Add React
