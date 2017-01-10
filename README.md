@@ -99,6 +99,7 @@ guard init
 bundle binstubs guard
 cucumber --init 
 ```
+to run guard, type ```guard```
 add Prefixer
 ```
 gem "autoprefixer-rails"
