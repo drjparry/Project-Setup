@@ -99,7 +99,12 @@ guard init
 bundle binstubs guard
 cucumber --init 
 ```
+add Prefixer
+```
+gem "autoprefixer-rails"
 
+rake tmp:clear
+```
 ___
 
 Add React
