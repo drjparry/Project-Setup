@@ -210,13 +210,10 @@ ___
 
 Add React
 
-Add to gemfile
-
-`gem 'react-rails', '~> 1.5' `
-
-Then in terminal
-
-`rails generate react:install`
+`gem "react_on_rails", "8.0.0"`  
+`rails generate react_on_rails:install`  
+`bundle && yarn`  
+`gem install foreman`  
 
 ----
 'in config/routes.rb..'
@@ -226,9 +223,7 @@ get 'callfors' => 'campaigns#index'
 ```
 
 Add Foundation
-`gem "react_on_rails", "8.0.0"`
-`rails generate react_on_rails:install`
-`bundle && yarn`
-`gem install foreman`
+`gem "foundation"`
+
 bundle
 `rails g foundation:install`
