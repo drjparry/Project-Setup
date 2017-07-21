@@ -223,7 +223,7 @@ get 'callfors' => 'campaigns#index'
 ```
 
 Add Foundation
-`gem "foundation"`
+`gem "foundation-rails"`
 
 bundle
 `rails g foundation:install`
