@@ -19,6 +19,7 @@ group :test do
   gem 'database_cleaner'
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'selenium-webdriver', "2.53.4"
 end
 ```
 
@@ -31,6 +32,12 @@ In your `spec/rails_helper.rb` file add the following require statement below th
 `require 'capybara/rails'`
 `require 'support/factory_girl'`
 `require_relative 'support/database_cleaner.rb'`
+```
+Capybara.register_driver :selenium_chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+Capybara.javascript_driver = :selenium_chrome
+```
 
 
 Add new file
