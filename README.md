@@ -15,11 +15,12 @@ rake db:create
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem "factory_girl_rails", "~> 4.0"
+  gem 'factory_bot'
   gem 'database_cleaner'
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem 'selenium-webdriver', "2.53.4"
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 end
 ```
 
@@ -33,10 +34,21 @@ In your `spec/rails_helper.rb` file add the following require statement below th
 `require 'support/factory_girl'`
 `require_relative 'support/database_cleaner.rb'`
 ```
-Capybara.register_driver :selenium_chrome do |app|
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
+
+Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
 end
-Capybara.javascript_driver = :selenium_chrome
+
+Capybara.javascript_driver = :chrome
+
+Capybara.configure do |config|
+  config.default_max_wait_time = 10 # seconds
+  config.default_driver        = :selenium
+end
 ```
 
 
@@ -47,12 +59,13 @@ Add new file
 Factory looks like
 
 ```
-FactoryGirl.define do
-  factory :callfor do
-    title "Dump Trump"
-    description "No more Trump please"
+FactoryBot.define do
+  factory :user do
+    first_name { "John" }
+    last_name  { "Doe" }
+    admin { false }
   end
-end
+
 ```
 
 Add new file 
@@ -90,7 +103,19 @@ end
  
  ```
  RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
+end
+```
+
+To compile webpack before tests
+```
+config.before :suite do
+  # Run webpack compilation before suite, so assets exists in public/packs
+  # It would be better to run the webpack compilation only if at least one :js spec
+  # should be executed, but `when_first_matching_example_defined`
+  # does not work with `config.infer_spec_type_from_file_location!`
+  # see https://github.com/rspec/rspec-core/issues/2366
+  `RAILS_ENV=test bin/webpack`
 end
 ```
 
@@ -213,16 +238,7 @@ gem "autoprefixer-rails"
 
 rake tmp:clear
 ```
-___
 
-Add React
-
-`gem "react_on_rails", "8.0.0"`  
-`rails generate react_on_rails:install`  
-`bundle && yarn`  
-`gem install foreman`  
-
-----
 'in config/routes.rb..'
 
 ```ruby
