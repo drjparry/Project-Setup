@@ -15,7 +15,7 @@ rake db:create
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'factory_bot'
+  gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'pry-rails'
   gem 'pry-byebug'
@@ -31,7 +31,7 @@ end
 In your `spec/rails_helper.rb` file add the following require statement below the other require statements:
 
 `require 'capybara/rails'`
-`require 'support/factory_girl'`
+`require 'support/factory_bot_rails'`
 `require_relative 'support/database_cleaner.rb'`
 ```
 Capybara.register_driver :chrome do |app|
