@@ -3,7 +3,7 @@
 
 `$ gem install rails`
 
-`rails new call4 -d mysql -T`
+`rails new call4 -d mysql -T --webpack=react`
 
 or
 
@@ -17,10 +17,18 @@ group :test do
   gem 'capybara'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
-  gem 'pry-rails'
-  gem 'pry-byebug'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+end
+
+group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
+  gem 'spinach'
 end
 ```
 
@@ -106,6 +114,42 @@ end
   config.include FactoryBot::Syntax::Methods
 end
 ```
+
+add new file for Spinach
+
+`features/supportenv.rb`
+
+```
+# Help Spinach find the spec directory for autoloading
+$LOAD_PATH.unshift(::File.expand_path('../../spec', __dir__))
+require './config/environment'
+require 'rspec/rails'
+# Most of the desired config is already in rspec
+require 'rails_helper'
+require 'database_cleaner'
+
+
+Dir[Rails.root.join("features/support/**/*.rb")].each do |f|
+  require f
+end
+
+DatabaseCleaner.strategy = :truncation
+
+Spinach.hooks.before_scenario do
+  ::Capybara.current_driver = :selenium_chrome_headless
+  DatabaseCleaner.clean_with(:truncation)
+end
+
+Spinach.hooks.after_scenario do
+  DatabaseCleaner.clean
+end
+
+# Spinach.config.save_and_open_page_on_failure = true
+
+```
+
+
+
 
 To compile webpack before tests
 ```
